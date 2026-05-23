@@ -1,0 +1,49 @@
+# 环境与密钥
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cert
+*.kubeconfig
+
+# 日志与运行时数据
+logs/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+audit.log
+
+# Go 构建产物
+*.exe
+*.test
+*.out
+bin/
+dist/
+coverage.out
+
+# Node / 前端构建产物
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+build/
+.cache/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Home Assistant 本地数据
+/share/
+ssl/
+addons_config/

@@ -1,0 +1,28 @@
+#!/usr/bin/with-contenv bashio
+set -e
+
+export PORT=8080
+export HA_URL="$(bashio::config 'ha_url')"
+export HA_TOKEN="$(bashio::config 'ha_token')"
+export ROKID_AUTH_AK="$(bashio::config 'rokid_auth_ak')"
+export ENTITY_ALIASES_FILE="$(bashio::config 'entity_aliases_file')"
+export ALLOWED_ENTITIES="$(bashio::config 'allowed_entities')"
+export ALLOWED_SERVICES="$(bashio::config 'allowed_services')"
+export CONFIRM_TOKEN="$(bashio::config 'confirm_token')"
+export AUDIT_LOG_FILE="$(bashio::config 'audit_log_file')"
+
+mkdir -p /share/rokid-ha-control-kit
+if [ ! -f "$ENTITY_ALIASES_FILE" ]; then
+  cat > "$ENTITY_ALIASES_FILE" <<'EOF'
+[
+  {
+    "entity_id": "light.living_room",
+    "domain": "light",
+    "aliases": ["客厅灯", "大厅灯"]
+  }
+]
+EOF
+fi
+
+echo "Starting rokid-ha-control-kit on port ${PORT}"
+exec /usr/bin/rokid-ha-control-kit
